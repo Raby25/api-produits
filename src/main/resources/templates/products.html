@@ -19,6 +19,7 @@
             <table class="table table-striped table-hover mb-0">
                 <thead class="table-dark">
                     <tr>
+                        <th>ID</th> <!-- Nouvelle colonne ID -->
                         <th>Nom</th>
                         <th>Description</th>
                         <th>Prix (€)</th>
@@ -29,14 +30,17 @@
                 </thead>
                 <tbody>
                     <tr th:each="product : ${products}">
+                        <td th:text="${product.id}"></td> <!-- Affichage de l'ID -->
                         <td th:text="${product.name}"></td>
                         <td th:text="${product.description}"></td>
                         <td th:text="${product.price}"></td>
                         <td th:text="${product.stock}"></td>
                         <td th:text="${#dates.format(product.createdAt, 'yyyy-MM-dd')}"></td>
                         <td>
-                            <a th:href="@{'/products/edit/' + ${product.id}}" class="btn btn-primary btn-sm me-1">Modifier</a>
-                            <a th:href="@{'/products/delete/' + ${product.id}}" class="btn btn-danger btn-sm">Supprimer</a>
+                            <a th:href="@{'/products/' + ${product.id}}" class="btn btn-info btn-sm me-1">Détails</a>
+                            <a th:href="@{/products/edit/{id}(id=${product.id})}" class="btn btn-primary btn-sm me-1">Modifier</a>
+                            <a th:href="@{'/products/delete/' + ${product.id}}" class="btn btn-danger btn-sm"
+       onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?');">Supprimer</a>
                         </td>
                     </tr>
                 </tbody>

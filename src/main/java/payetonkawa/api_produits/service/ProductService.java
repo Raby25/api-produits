@@ -7,6 +7,7 @@ import payetonkawa.api_produits.repository.ProductRepository;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Sort;
 
 @Service
 public class ProductService {
@@ -18,7 +19,7 @@ public class ProductService {
     }
 
     public List<Product> findAll() {
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     public Optional<Product> findById(Integer id) {
@@ -35,5 +36,9 @@ public class ProductService {
 
     public boolean existsByName(String name) {
         return repository.existsByName(name);
+    }
+
+    public Optional<Product> findByName(String name) {
+        return repository.findByName(name);
     }
 }
