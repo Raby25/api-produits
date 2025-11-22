@@ -32,4 +32,8 @@ public class ProductService {
     public void delete(Integer id) {
         repository.deleteById(id);
     }
+
+    public boolean existsByName(String name) {
+        return repository.existsByName(name);
+    }
 }

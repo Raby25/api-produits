@@ -3,28 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste des produits</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<h1>Produits</h1>
+<body class="bg-light">
 
-<!-- Si la liste est vide, afficher un message -->
-<div th:if="${#lists.isEmpty(products)}">
-    <p>Aucun produit disponible pour le moment.</p>
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Liste des produits</h1>
+        <a href="/products/add" class="btn btn-success">Ajouter un produit</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Prix (€)</th>
+                        <th>Stock</th>
+                        <th>Date de création</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product : ${products}">
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.description}"></td>
+                        <td th:text="${product.price}"></td>
+                        <td th:text="${product.stock}"></td>
+                        <td th:text="${#dates.format(product.createdAt, 'yyyy-MM-dd')}"></td>
+                        <td>
+                            <a th:href="@{'/products/edit/' + ${product.id}}" class="btn btn-primary btn-sm me-1">Modifier</a>
+                            <a th:href="@{'/products/delete/' + ${product.id}}" class="btn btn-danger btn-sm">Supprimer</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
 
-<!-- Si la liste contient des produits, afficher le tableau -->
-<table border="1" th:if="${!#lists.isEmpty(products)}">
-    <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th>Prix</th>
-    </tr>
-    <tr th:each="product : ${products}">
-        <td th:text="${product.id}"></td>
-        <td th:text="${product.name}"></td>
-        <td th:text="${product.price}"></td>
-    </tr>
-</table>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@ package payetonkawa.api_produits.model;
 import java.util.Date;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
@@ -15,6 +16,8 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotBlank(message = "Le nom est obligatoire")
+    @Column(unique = true)
     private String name;
     private String description;
     private float price;
