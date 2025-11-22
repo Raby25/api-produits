@@ -1,4 +1,4 @@
-package payetonkawa.api_produits;
+package payetonkawa.api_produits.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable() // désactive CSRF
+        http.csrf(csrf -> csrf.disable()) // désactive CSRF
                 .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()); // toutes les routes accessibles sans
                                                                                // login
         return http.build();
