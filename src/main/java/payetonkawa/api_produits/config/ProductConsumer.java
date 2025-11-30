@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductConsumer {
     @RabbitListener(queues = "${rabbitmq.product.queue}")
-    public void recevoirProduit(Product product) {
+    public void receive(Product product) {
         System.out.println("Produit reçu depuis RabbitMQ : " + product);
     }
 
